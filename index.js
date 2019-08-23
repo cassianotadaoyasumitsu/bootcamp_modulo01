@@ -6,7 +6,6 @@ const server = express();
 
 server.use(express.json()); // Passa para o express módulo para leitura do json
 
-// localhost:3000/teste
 // req = dados da requisição
 // Query params = ?teste1 (const nome = req.query.nome;)
 // Route params = /users/1(id) (const { id } = req.params;)
@@ -15,9 +14,10 @@ server.use(express.json()); // Passa para o express módulo para leitura do json
 // CRUD - Create, Read, Update, Delete
 
 // Variável de vetor de usuários
-const users = ["Cassiano", "Tadao", "Yasuiiiii"];
+const users = ["Cassiano", "Tadao", "Yasumitsu"];
 
 // Middleware global, passa por todas as rotas
+// Next deixa que o codigo continue executando
 server.use((req, res, next) => {
   console.time("Request"); // Pega tempo inicial
   console.log(`Método: ${req.method}; URL: ${req.url}`);
@@ -42,7 +42,7 @@ function checkUserInArray(req, res, next) {
   const user = users[req.params.index];
 
   // Se usuário não existe no array
-  if (!users[req.params.index]) {
+  if (!user) {
     return res.status(400).json({ error: "User does not exists!" });
   }
 
